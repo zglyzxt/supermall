@@ -46,15 +46,15 @@ export default {
   /*.active*/
   /*  color: #f00*/
   .tab-bar-item
-    flex:1
-    text-align: center
-    height: 49px//很多高度都是49px
-    font-style: 14px
+    flex 1
+    text-align center
+    height 49px//很多高度都是49px
+    font-style 14px
     img
-      height: 24px
-      width: 24px
-      margin-top:3px
-      vertical-align: middle
-      margin-bottom:2px
+      height 24px
+      width 24px
+      margin-top 3px
+      vertical-align middle
+      margin-bottom 2px
 
 </style>
