@@ -43,9 +43,12 @@ import BScroll from 'better-scroll'
        })
 
       // 3.监听上拉事件
-      this.scroll.on('pullingUp', () => {
-        this.$emit('pullingUp')
-      })
+      if(this.pullUpLoad){
+        this.scroll.on('pullingUp', () => {
+          this.$emit('pullingUp')
+          console.log('滚动底部')
+        })
+      }
     },
     methods:{
      scrollTo(x,y,time=300) {
@@ -53,6 +56,13 @@ import BScroll from 'better-scroll'
      },
       finishPullUp() {
         this.scroll.finishPullUp()
+      },
+      refresh() {
+        console.log('-----')
+        this.scroll && this.scroll.refresh()
+      },
+      getScrollY() {
+        return this.scroll ? this.scroll.y : 0
       }
     }
 
