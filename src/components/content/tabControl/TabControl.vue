@@ -44,6 +44,7 @@
   display flex
   text-align center
   font-size 15px
+  background #fff
   .tab-control-item
     flex 1
     height 40px
