@@ -106,7 +106,10 @@ export default {
      this.$refs.scroll.refresh()
   },
   deactivated(){
+  //1.保存y值
   this.saveY = this.$refs.scroll.getScrollY
+  //2.取消全局事件的监听
+  this.$bus.$off()
   },
   methods: {
     /**
