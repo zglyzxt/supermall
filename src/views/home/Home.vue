@@ -47,6 +47,7 @@ import RecommendView from './childComps/RecommendViews'
 import FeatureView from './childComps/FeatureView'
 
 import {getHomeMultidata,getHomeGoods } from "network/home"
+import {itemListenerMinxin} from "common/mixin";
 import {debounce} from 'common/utils'
 //default 导出才能不用大括号
 
@@ -62,6 +63,7 @@ export default {
     GoodsList,
     BackTop
   },
+  mixins:[itemListenerMinxin],
   data() {
     return {
      result: null,
@@ -77,6 +79,7 @@ export default {
      tabOffsetTop: 0,
      isFixedTop:false,
      saveY:0
+     // itemImageListener:null
     }
   },
   computed: {
@@ -85,10 +88,13 @@ export default {
     }
   },
   mounted(){
-   const refresh = debounce(this.$refs.scroll.refresh,500)
-   this.$bus.$on('itemImageLoad',() =>{
-       refresh()
-   })
+  //这个地方img标签确实被挂载,但是其中的图片还没哟占据高度
+  //this.$refs.scroll.refresh对这个函数进行防抖操作
+  //  const newRefresh = debounce(this.$refs.scroll.refresh,100)
+  //  this.itemImageListener = ()=> {
+  //    newRefresh()
+  //  }
+   // this.$bus.$on('itemImageLoad',this.itemImageListener)
   },
   created() {
     //1.请求多个数据，这个接口包含的很多数据
@@ -107,9 +113,9 @@ export default {
   },
   deactivated(){
   //1.保存y值
-  this.saveY = this.$refs.scroll.getScrollY
+    this.saveY = this.$refs.scroll.getScrollY
   //2.取消全局事件的监听
-  this.$bus.$off()
+    this.$bus.$off('itemImageLoad',this.itemImageListener)
   },
   methods: {
     /**
